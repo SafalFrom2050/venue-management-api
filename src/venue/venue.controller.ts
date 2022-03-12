@@ -1,17 +1,34 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { VenueService } from './venue.service';
+import { CreateVenueDto } from './dto';
+import { JwtGuard } from '../auth/guard';
 
+@UseGuards(JwtGuard)
 @Controller('venues')
 export class VenueController {
   constructor(private venueService: VenueService) {}
 
-  @Post()
-  createVenue() {
-    return this.venueService.createVenue();
+  @Post('create')
+  createVenue(@Body() dto: CreateVenueDto) {
+    return this.venueService.createVenue(dto);
   }
 
   @Get()
   getVenues() {
+    return this.venueService.getVenues();
+  }
+
+  @Get(':id')
+  getVenue() {
     return this.venueService.getVenues();
   }
 

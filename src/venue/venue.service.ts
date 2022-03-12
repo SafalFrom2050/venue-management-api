@@ -1,20 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { Venue } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateVenueDto } from './dto';
 
 @Injectable()
 export class VenueService {
-  getVenues() {
-    return [
-      {
-        name: 'Test',
-        description: 'this is a very very very very very very long description',
-        imageUrl: 'https://picsum.photos/800/600',
-      },
-    ];
+  constructor(private prisma: PrismaService) {}
+
+  async getVenues() {
+    try {
+      const venues = await this.prisma.venue.findMany({});
+      return venues;
+    } catch (e) {
+      throw e;
+    }
   }
 
-  createVenue() {
-    return 'Still developing...';
+  async createVenue(dto: CreateVenueDto) {
+    try {
+      const newVenue = await this.prisma.venue.create({
+        data: {
+          name: dto.name,
+          description: dto.description,
+          imageUrl: dto.imageUrl,
+        },
+      });
+
+      return {
+        status: true,
+        venue: newVenue,
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 
   editVenue(id: number) {
