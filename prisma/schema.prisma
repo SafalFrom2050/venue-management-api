@@ -38,3 +38,18 @@ model Venue {
 
     @@map("venues")
 }
+
+model Event {
+    id  Int @id @default(autoincrement())
+
+    title String
+    details String? @db.Text
+    imagePath String?
+    photographer String?
+    price String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("events")
+}
