@@ -24,4 +24,13 @@ export class FeedbackService {
       throw e;
     }
   }
+
+  async getFeedbacks() {
+    try {
+      const feedbacks = await this.prisma.feedback.findMany({});
+      return feedbacks;
+    } catch (e) {
+      throw e;
+    }
+  }
 }
