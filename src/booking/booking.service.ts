@@ -11,7 +11,7 @@ export class BookingService {
       const newBooking = await this.prisma.booking.create({
         data: {
           userId: dto.userId,
-          dateTime: dto.dateTime,
+          dateTime: new Date(dto.dateTime),
           event: dto.event,
         },
       });
