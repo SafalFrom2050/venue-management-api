@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { EventModule } from './event/event.module';
 import { FeedbackModule } from './feedback/feedback.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { FeedbackModule } from './feedback/feedback.module';
     PrismaModule,
     EventModule,
     FeedbackModule,
+    BookingModule,
   ],
 })
 export class AppModule {}
