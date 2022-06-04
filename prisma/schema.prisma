@@ -19,11 +19,44 @@ model User {
     phone String?
     email String @unique
     password String
+    address UserAddress @relation(fields: [addressId], references: [id])
+    addressId Int
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@map("users")
+}
+
+model UserAddress {
+    id  Int @id @default(autoincrement())
+
+    country String?
+    state String?
+    city String?
+    street String?
+    user User[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("user_addresses")
+}
+
+model Admin {
+    id  Int @id @default(autoincrement())
+
+    firstName String?
+    lastName String?
+
+    phone String?
+    email String @unique
+    password String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("admins")
 }
 
 model Venue {

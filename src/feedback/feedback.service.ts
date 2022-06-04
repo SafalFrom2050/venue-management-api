@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFeedbackDto } from './dto/createFeedback.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateFeedbackDto } from './dto/updateFeedback.dto';
 
 @Injectable()
 export class FeedbackService {
@@ -29,6 +30,42 @@ export class FeedbackService {
     try {
       const feedbacks = await this.prisma.feedback.findMany({});
       return feedbacks;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async update(id: number, dto: UpdateFeedbackDto) {
+    try {
+      const feedback = await this.prisma.feedback.update({
+        where: {
+          id,
+        },
+        data: {
+          username: dto.username,
+          email: dto.email,
+          feedback: dto.feedback,
+        },
+      });
+      return {
+        status: true,
+        feedback,
+      };
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async delete(id: number) {
+    try {
+      const feedback = await this.prisma.feedback.delete({
+        where: {
+          id,
+        },
+      });
+      return {
+        status: true,
+      };
     } catch (e) {
       throw e;
     }

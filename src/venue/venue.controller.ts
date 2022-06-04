@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   Put,
@@ -11,6 +12,8 @@ import {
 import { VenueService } from './venue.service';
 import { CreateVenueDto } from './dto';
 import { JwtGuard } from '../auth/guard';
+import { UpdateFeedbackDto } from '../feedback/dto/updateFeedback.dto';
+import { UpdateVenueDto } from './dto/updateVenue.dto';
 
 @UseGuards(JwtGuard)
 @Controller('venues')
@@ -33,12 +36,12 @@ export class VenueController {
   }
 
   @Patch('id')
-  editVenue(id: number) {
-    return this.venueService.editVenue(id);
+  editVenue(@Param('id') id: string, dto: UpdateVenueDto) {
+    return this.venueService.editVenue(+id, dto);
   }
 
   @Delete('id')
-  deleteVenue(id: number) {
-    return this.venueService.deleteVenue(id);
+  deleteVenue(@Param('id') id: string) {
+    return this.venueService.deleteVenue(+id);
   }
 }

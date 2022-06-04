@@ -38,17 +38,49 @@ export class EventService {
 
   async findOne(id: number) {
     try {
-      // return await this.prisma.event.findOne(id);
+      return await this.prisma.event.findFirst({ where: { id: id } });
     } catch (e) {
       throw e;
     }
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto) {
+    try {
+      const updatedVenue = await this.prisma.event.update({
+        where: {
+          id: id,
+        },
+        data: {
+          title: updateEventDto.title,
+          details: updateEventDto.details,
+          imagePath: updateEventDto.imagePath,
+          photographer: updateEventDto.photographer,
+          price: updateEventDto.price,
+        },
+      });
+
+      return {
+        status: true,
+        venue: updatedVenue,
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  async remove(id: number) {
+    try {
+      const venue = await this.prisma.event.delete({
+        where: {
+          id: id,
+        },
+      });
+
+      return {
+        status: true,
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 }
