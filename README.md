@@ -6,7 +6,7 @@ Feature highlights:
 *   JWT based authentication
     
 
-**Check out the full API documentation below.**
+**Check out the full API documentation:**
 https://documenter.getpostman.com/view/13734708/UzJFvJB8
 
 ## Installation
