@@ -19,8 +19,7 @@ model User {
     phone String?
     email String @unique
     password String
-    address UserAddress @relation(fields: [addressId], references: [id])
-    addressId Int
+    addressId Int?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -35,7 +34,6 @@ model UserAddress {
     state String?
     city String?
     street String?
-    user User[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
@@ -112,4 +110,17 @@ model Booking {
     updatedAt DateTime @updatedAt
 
     @@map("bookings")
+}
+
+model Participation {
+    id  Int @id @default(autoincrement())
+
+    userId Int
+    dateTime DateTime?
+    event String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("participations")
 }

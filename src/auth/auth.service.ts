@@ -26,6 +26,7 @@ export class AuthService {
           phone: '',
           firstName: dto.firstName,
           lastName: dto.lastName,
+          addressId: dto.addressId,
         },
       });
       return this.signToken(user.id, user.email);
@@ -36,6 +37,7 @@ export class AuthService {
         }
         throw error;
       }
+      console.log(error);
     }
   }
 

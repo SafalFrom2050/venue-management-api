@@ -13,4 +13,7 @@ export class SignUpDto {
 
   @IsNotEmpty()
   password: string;
+
+  @IsOptional()
+  addressId: number;
 }

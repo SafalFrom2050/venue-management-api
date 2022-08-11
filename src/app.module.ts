@@ -7,6 +7,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { EventModule } from './event/event.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { BookingModule } from './booking/booking.module';
+import { ParticipationModule } from './participation/participation.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { BookingModule } from './booking/booking.module';
     EventModule,
     FeedbackModule,
     BookingModule,
+    ParticipationModule,
   ],
 })
 export class AppModule {}
